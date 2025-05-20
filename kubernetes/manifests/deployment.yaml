@@ -2,18 +2,30 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: demo-app
+  labels:
+    app: demo-app
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
-      app: demo
+      app: demo-app
   template:
     metadata:
       labels:
-        app: demo
+        app: demo-app
     spec:
       containers:
-      - name: demo
-        image: nginx
+      - name: demo-app
+        image: docker.io/korupon/demo-app:latest
         ports:
-        - containerPort: 80
+        - containerPort: 8080
+        env:
+        - name: ENVIRONMENT
+          value: "production"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+
