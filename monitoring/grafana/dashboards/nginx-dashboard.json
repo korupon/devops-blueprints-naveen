@@ -1,6 +1,27 @@
 {
   "dashboard": {
-    "title": "Nginx Dashboard",
-    "panels": []
+    "title": "Demo App Monitoring",
+    "panels": [
+      {
+        "type": "graph",
+        "title": "CPU Usage",
+        "targets": [
+          {
+            "expr": "sum(rate(container_cpu_usage_seconds_total{pod=~\"demo-app.*\"}[5m]))",
+            "legendFormat": "{{pod}}"
+          }
+        ]
+      },
+      {
+        "type": "graph",
+        "title": "Memory Usage",
+        "targets": [
+          {
+            "expr": "sum(container_memory_usage_bytes{pod=~\"demo-app.*\"})",
+            "legendFormat": "{{pod}}"
+          }
+        ]
+      }
+    ]
   }
 }
