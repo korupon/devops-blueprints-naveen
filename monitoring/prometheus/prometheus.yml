@@ -1,1 +1,12 @@
+groups:
+- name: demo-app-alerts
+  rules:
+  - alert: HighCPUUsage
+    expr: sum(rate(container_cpu_usage_seconds_total{pod=~"demo-app.*"}[5m])) > 0.8
+    for: 2m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High CPU usage detected on demo-app pods"
+      description: "CPU usage > 80% for more than 2 minutes."
 # Placeholder for prometheus.yml
