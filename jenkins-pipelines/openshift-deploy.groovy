@@ -1,0 +1,1 @@
+# Placeholder for jenkins-pipelines/openshift-deploy.groovy

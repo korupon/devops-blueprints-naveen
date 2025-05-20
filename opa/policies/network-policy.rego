@@ -1,0 +1,1 @@
+# Placeholder for opa/policies/network-policy.rego

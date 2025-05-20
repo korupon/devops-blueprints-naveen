@@ -1,7 +1,11 @@
-<<<<<<< HEAD
-# DevOps Blueprints - Naveen
+# DevOps Blueprints - NaveenOK
 
-This repository contains modular, production-ready DevOps pipeline blueprints with support for ArgoCD, Jenkins, Terraform, AKS, ELK, OPA, and Azure Key Vault integration.
-=======
-# devops-blueprints-naveen
->>>>>>> 8153272142dcd49f01dffd58c2d4f4b334cc89a1
+This is a comprehensive DevOps reference repository with:
+
+- Jenkins & Azure DevOps Pipelines
+- Kubernetes (AKS, OpenShift, EKS)
+- Terraform environments
+- Azure Key Vault & Sealed Secrets
+- Logging with ELK
+- Monitoring with Grafana
+- OPA Security Policies
