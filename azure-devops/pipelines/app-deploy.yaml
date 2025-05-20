@@ -1,14 +1,30 @@
 trigger:
-  branches:
-    include:
-      - main
+- main
 
-stages:
-- stage: Build
-  jobs:
-  - job: Build
-    steps:
-    - task: Maven@3
-      inputs:
-        mavenPomFile: 'pom.xml'
-        goals: 'clean package'
+variables:
+  imageName: 'korupon/demo-app'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: Maven@3
+  inputs:
+    goals: 'clean package'
+
+- task: Docker@2
+  inputs:
+    command: 'buildAndPush'
+    repository: 'korupon/demo-app'
+    dockerfile: '**/Dockerfile'
+    containerRegistry: 'myDockerRegistryServiceConnection'
+    tags: 'latest'
+
+- task: Kubernetes@1
+  inputs:
+    connectionType: 'Kubernetes Service Connection'
+    kubernetesServiceEndpoint: 'myAKSServiceConnection'
+    namespace: 'default'
+    command: 'apply'
+    useConfigurationFile: true
+    configuration: 'k8s/deployment.yaml'
