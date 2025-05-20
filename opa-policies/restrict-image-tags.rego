@@ -1,0 +1,1 @@
+# Placeholder for restrict-image-tags.rego
