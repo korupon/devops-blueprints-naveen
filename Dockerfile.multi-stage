@@ -1,1 +1,13 @@
-# Placeholder for Dockerfile.multi-stage
+# Build stage
+FROM maven:3.8.6-openjdk-17 AS build
+WORKDIR /build
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+# Run stage
+FROM openjdk:17-jdk-alpine
+WORKDIR /app
+COPY --from=build /build/target/demo-app.jar ./demo-app.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "demo-app.jar"]
